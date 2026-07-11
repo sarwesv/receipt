@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Add · receipt{% endblock %}
+{% block content %}
+<h1>Add a receipt</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<form class="uploader" method="post" action="/add" enctype="multipart/form-data">
+  <label class="dropzone">
+    <input type="file" name="file" accept="image/*" required>
+    <span>Choose a receipt image (JPG, PNG, WEBP)</span>
+  </label>
+  <button type="submit">Scan &amp; save</button>
+  <p class="hint">The image is OCR'd on your machine and stored locally. This can take a few seconds the first time while the OCR model loads.</p>
+</form>
+{% endblock %}

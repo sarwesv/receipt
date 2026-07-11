@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Search · receipt{% endblock %}
+{% block content %}
+<form class="searchbar" method="get" action="/">
+  <input type="search" name="q" value="{{ q }}" placeholder="Search your receipts (e.g. IKEA)" autofocus>
+  <button type="submit">Search</button>
+</form>
+
+{% if q %}
+  <p class="meta">{{ results|length }} result{{ '' if results|length == 1 else 's' }} for “{{ q }}”</p>
+{% else %}
+  <p class="meta">{{ total }} receipt{{ '' if total == 1 else 's' }} stored{% if total %} · showing most recent{% endif %}</p>
+{% endif %}
+
+{% if results %}
+  <ul class="results">
+    {% for r in results %}
+      <li>
+        <a href="/receipt/{{ r.id }}">
+          <img class="thumb" src="/image/{{ r.id }}" alt="receipt {{ r.id }}" loading="lazy">
+          <div class="info">
+            <span class="fname">{{ r.filename }}</span>
+            <span class="date">{{ r.created_at[:10] }}</span>
+            <p class="snippet">{{ r.snippet }}</p>
+          </div>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <div class="empty">
+    {% if q %}
+      <p>No receipts match “{{ q }}”.</p>
+    {% else %}
+      <p>No receipts yet. <a href="/add">Add your first one →</a></p>
+    {% endif %}
+  </div>
+{% endif %}
+{% endblock %}

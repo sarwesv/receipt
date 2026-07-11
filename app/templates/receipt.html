@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ receipt.filename }} · receipt{% endblock %}
+{% block content %}
+<p><a href="/">← Back to search</a></p>
+<h1>{{ receipt.filename }}</h1>
+<p class="meta">Added {{ receipt.created_at[:19].replace('T', ' ') }} UTC</p>
+<div class="detail">
+  <img class="full" src="/image/{{ receipt.id }}" alt="{{ receipt.filename }}">
+  <div class="text">
+    <h2>Extracted text</h2>
+    {% if receipt.ocr_text %}
+      <pre>{{ receipt.ocr_text }}</pre>
+    {% else %}
+      <p class="empty">No text was detected in this image.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

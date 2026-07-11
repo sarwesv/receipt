@@ -1,0 +1,12 @@
+# local data — receipt images and the SQLite database stay on the user's machine
+data/
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# os
+.DS_Store
